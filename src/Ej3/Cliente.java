@@ -14,6 +14,8 @@ public class Cliente {
             ObjectOutputStream escribir = new ObjectOutputStream(out);
             ObjectInputStream leer = new ObjectInputStream(in);
             boolean ejecucion = true;
+            String idCliente = (String)leer.readObject();
+            System.out.println("Identificador de cliente: "+idCliente);
             do {
                 System.out.print("Introduce el id del profesor buscado: ");
                 String idProfesor = userInput.nextLine();

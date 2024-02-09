@@ -43,6 +43,7 @@ public class Servidor implements Runnable {
             OutputStream out = conexion.getOutputStream();
             ObjectInputStream leer = new ObjectInputStream(in);
             ObjectOutputStream escribir = new ObjectOutputStream(out);
+            escribir.writeObject(String.valueOf(idClienteHilo));
             boolean ejecucion = true;
             do {
                 String idProfesor = (String) leer.readObject();
