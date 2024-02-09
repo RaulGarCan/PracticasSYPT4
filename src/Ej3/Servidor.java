@@ -47,15 +47,16 @@ public class Servidor implements Runnable {
             boolean ejecucion = true;
             do {
                 String idProfesor = (String) leer.readObject();
-                idsPeticionados.add(Integer.parseInt(idProfesor));
-                Profesor profesor = buscarProfesor(Integer.parseInt(idProfesor));
-                escribir.writeObject(profesor);
-                if(profesor!=null){
-                    profesoresDevueltos.add(profesor);
-                }
-                if(Integer.parseInt(idProfesor)<0){
+                if(idProfesor.equalsIgnoreCase("***")){
                     System.out.println("Cerrando conexion con cliente nº"+this.idClienteHilo);
                     ejecucion = false;
+                } else {
+                    idsPeticionados.add(Integer.parseInt(idProfesor));
+                    Profesor profesor = buscarProfesor(Integer.parseInt(idProfesor));
+                    escribir.writeObject(profesor);
+                    if(profesor!=null){
+                        profesoresDevueltos.add(profesor);
+                    }
                 }
             }while (ejecucion);
             LocalDateTime fechaHoraDesconexion = LocalDateTime.now();

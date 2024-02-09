@@ -20,15 +20,16 @@ public class Cliente {
                 System.out.print("Introduce el id del profesor buscado: ");
                 String idProfesor = userInput.nextLine();
                 escribir.writeObject(idProfesor);
-                Profesor profesor = (Profesor) leer.readObject();
-                if(profesor!=null){
-                    System.out.println(profesor.toString());
-                } else {
-                    System.out.println("Profesor no encontrado");
-                }
-                if(Integer.parseInt(idProfesor)<0){
+                if(idProfesor.equalsIgnoreCase("***")){
                     System.out.println("Cerrando conexion con el servidor...");
                     ejecucion = false;
+                } else {
+                    Profesor profesor = (Profesor) leer.readObject();
+                    if(profesor!=null){
+                        System.out.println(profesor);
+                    } else {
+                        System.out.println("Profesor no encontrado");
+                    }
                 }
             }while (ejecucion);
         } catch (IOException e) {

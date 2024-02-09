@@ -25,6 +25,13 @@ public class ClienteConectado implements Serializable {
         this.fechaHoraDesconexion = fechaHoraDesconexion;
         this.duracionConexion = calcularTiempoTotalConexion();
     }
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
 
     public LocalDateTime getFechaHoraConexion() {
         return fechaHoraConexion;
@@ -32,22 +39,6 @@ public class ClienteConectado implements Serializable {
 
     public void setFechaHoraConexion(LocalDateTime fechaHoraConexion) {
         this.fechaHoraConexion = fechaHoraConexion;
-    }
-
-    public ArrayList<Integer> getIdsPeticionados() {
-        return idsPeticionados;
-    }
-
-    public void setIdsPeticionados(ArrayList<Integer> idsPeticionados) {
-        this.idsPeticionados = idsPeticionados;
-    }
-
-    public ArrayList<Profesor> getProfesoresEnviados() {
-        return profesoresEnviados;
-    }
-
-    public void setProfesoresEnviados(ArrayList<Profesor> profesoresEnviados) {
-        this.profesoresEnviados = profesoresEnviados;
     }
 
     public LocalDateTime getFechaHoraDesconexion() {
@@ -66,25 +57,32 @@ public class ClienteConectado implements Serializable {
         this.duracionConexion = duracionConexion;
     }
 
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
     public long calcularTiempoTotalConexion(){
         return fechaHoraConexion.until(fechaHoraDesconexion, ChronoUnit.SECONDS);
+    }
+    public ArrayList<Integer> getIdsPeticionados() {
+        return idsPeticionados;
+    }
+
+    public void setIdsPeticionados(ArrayList<Integer> idsPeticionados) {
+        this.idsPeticionados = idsPeticionados;
+    }
+
+    public ArrayList<Profesor> getProfesoresEnviados() {
+        return profesoresEnviados;
+    }
+
+    public void setProfesoresEnviados(ArrayList<Profesor> profesoresEnviados) {
+        this.profesoresEnviados = profesoresEnviados;
     }
     public HashMap<String, Object> toMap(){
         HashMap<String, Object> mapa = new HashMap<>();
         mapa.put("idCliente",idCliente);
         mapa.put("fechaHoraConexion",fechaHoraConexion);
-        mapa.put("idsPeticionados",idsPeticionados);
-        mapa.put("profesoresEnviados",profesoresEnviados);
         mapa.put("fechaHoraDesconexion",fechaHoraDesconexion);
         mapa.put("duracionConexion",duracionConexion);
+        mapa.put("idsPeticionados",idsPeticionados);
+        mapa.put("profesoresEnviados",profesoresEnviados);
         return mapa;
     }
 }
