@@ -51,11 +51,16 @@ public class Servidor implements Runnable {
                     System.out.println("Cerrando conexion con cliente nº"+this.idClienteHilo);
                     ejecucion = false;
                 } else {
-                    idsPeticionados.add(Integer.parseInt(idProfesor));
-                    Profesor profesor = buscarProfesor(Integer.parseInt(idProfesor));
-                    escribir.writeObject(profesor);
-                    if(profesor!=null){
-                        profesoresDevueltos.add(profesor);
+                    try {
+                        idsPeticionados.add(Integer.parseInt(idProfesor));
+                        Profesor profesor = buscarProfesor(Integer.parseInt(idProfesor));
+                        escribir.writeObject(profesor);
+                        if(profesor!=null){
+                            profesoresDevueltos.add(profesor);
+                        }
+                    }catch (NumberFormatException e){
+                        escribir.writeObject(null);
+                        System.out.println("No se puede convertir texto a entero");
                     }
                 }
             }while (ejecucion);
