@@ -1,4 +1,4 @@
-package Ej1;
+package com.mycompany.practicassypt4.Ej1;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package Ej3;
+package com.mycompany.practicassypt4.Ej3;
 
 import java.io.Serializable;
 import java.util.ArrayList;

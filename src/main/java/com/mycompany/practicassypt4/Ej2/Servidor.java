@@ -1,11 +1,16 @@
-package Ej2;
+package com.mycompany.practicassypt4.Ej2;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.OutputStream;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Date;
+import java.util.Properties;
 
 public class Servidor implements Runnable {
     private Socket conexion;
@@ -39,6 +44,8 @@ public class Servidor implements Runnable {
                     case "1":
                         Correo correo = (Correo)leer.readObject();
                         System.out.println(correo);
+                        System.out.println("Enviando correo de "+correo.getOrigen()+" a "+correo.getDestinatario());
+                        enviarCorreo(correo);
                         break;
                     case "2":
                         System.out.println("Conexión terminada");
@@ -52,5 +59,33 @@ public class Servidor implements Runnable {
                 throw new RuntimeException(e);
             }
         }while (ejecucion);
+    }
+    public static void enviarCorreo(Correo correo){
+        String smtp = "alt1.gmail-smtp-in.l.google.com";
+        Properties propiedades = System.getProperties();
+        propiedades.put("mail.smtp.host",smtp);
+        Session sesion = Session.getInstance(propiedades, null);
+        MimeMessage mensaje = new MimeMessage(sesion);
+
+        try {
+            mensaje.addHeader("Content-type", "text/HTML; charset=UTF-8");
+            mensaje.addHeader("format", "flowed");
+            mensaje.addHeader("Content-Transfer-Encoding", "8bit");
+
+            mensaje.setFrom(new InternetAddress(correo.getOrigen(), "NoReply-JD"));
+            mensaje.setReplyTo(InternetAddress.parse(correo.getDestinatario(), false));
+
+            mensaje.setSubject(correo.getAsunto(), "UTF-8");
+            mensaje.setText(correo.getMensaje(), "UTF-8");
+            mensaje.setSentDate(new Date());
+
+            mensaje.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correo.getDestinatario(), false));
+            Transport.send(mensaje);
+            System.out.println("Correo enviado");
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
