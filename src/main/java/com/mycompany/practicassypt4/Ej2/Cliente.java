@@ -25,13 +25,15 @@ public class Cliente {
                     case "1":
                         System.out.print("Introduce el correo origen: ");
                         String origen = userInput.nextLine();
+                        System.out.print("Introduce la contraseña de tu correo: ");
+                        String passwd = userInput.nextLine();
                         System.out.print("Introduce el correo destino: ");
                         String destino = userInput.nextLine();
                         System.out.print("Introduce el asunto del correo: ");
                         String asunto = userInput.nextLine();
                         System.out.print("Introduce el mensaje del correo: ");
                         String mensaje = userInput.nextLine();
-                        Correo correo = new Correo(origen,destino,asunto,mensaje);
+                        Correo correo = new Correo(origen,destino,asunto,mensaje,passwd);
                         escribir.writeObject(correo);
                         break;
                     case "2":

@@ -7,12 +7,14 @@ public class Correo implements Serializable {
     private String destinatario;
     private String asunto;
     private String mensaje;
+    private String passwd;
 
-    public Correo(String origen, String destinatario, String asunto, String mensaje) {
+    public Correo(String origen, String destinatario, String asunto, String mensaje, String passwd) {
         this.origen = origen;
         this.destinatario = destinatario;
         this.asunto = asunto;
         this.mensaje = mensaje;
+        this.passwd = passwd;
     }
 
     public String getOrigen() {
@@ -45,6 +47,14 @@ public class Correo implements Serializable {
 
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
     }
 
     @Override

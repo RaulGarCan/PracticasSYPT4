@@ -1,9 +1,6 @@
 package com.mycompany.practicassypt4.Ej2;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.*;
@@ -64,7 +61,12 @@ public class Servidor implements Runnable {
         String smtp = "alt1.gmail-smtp-in.l.google.com";
         Properties propiedades = System.getProperties();
         propiedades.put("mail.smtp.host",smtp);
-        Session sesion = Session.getInstance(propiedades, null);
+        Session sesion = Session.getInstance(propiedades, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(correo.getOrigen(), correo.getPasswd());
+            }
+        });
         MimeMessage mensaje = new MimeMessage(sesion);
 
         try {
