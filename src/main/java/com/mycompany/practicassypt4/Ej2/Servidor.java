@@ -61,6 +61,7 @@ public class Servidor implements Runnable {
         String smtp = "alt1.gmail-smtp-in.l.google.com";
         Properties propiedades = System.getProperties();
         propiedades.put("mail.smtp.host",smtp);
+        //propiedades.put("mail.smtp.port",25);
         Session sesion = Session.getInstance(propiedades, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
